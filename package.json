@@ -1,13 +1,19 @@
 {
-  "name": "aaa-diff",
-  "version": "1.0.0",
-  "description": "",
+  "name": "aaa-list-diff",
+  "version": "0.0.0-alpha",
+  "description": "a diff util for general list",
   "main": "index.js",
   "scripts": {
-    "build:watch": "node_modules/.bin/webpack -w",
+    "build": "node_modules/.bin/webpack -w",
     "test": "jasmine-ts \"test/**/*.spec.ts\""
   },
-  "author": "",
+  "keywords": [
+    "diff",
+    "typescript"
+  ],
+  "author": "aaa",
+  "email": "120000456@qq.com",
+  "homepage": "https://github.com/Mr-haili/aaa-list-diff",
   "license": "ISC",
   "devDependencies": {
     "@types/core-js": "^0.9.46",
