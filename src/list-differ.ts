@@ -1,6 +1,7 @@
 import { myers } from './core/algorithm';
 import { makeDiffsFromPosList, Diff, DiffType } from './core/diff';
 import { Pos } from './core/types';
+import { Patch } from './core/patch';
 
 export class ListDiffer<T> {
 	constructor(readonly isEqFn?: any){ }
@@ -30,16 +31,14 @@ export class ListDiffer<T> {
 	  while(i < len) diffs.unshift(new Diff(oldList[i++]));
 
 	  [i, len] = [oldListLen - commonSuffixLen, oldListLen];
-	  console.log(i, len);
 	  while(i < len) diffs.push(new Diff(oldList[i++]));
 
 	  return diffs;
 	}
 
 	private _diffCompute(oldList: ArrayLike<T>, newList: ArrayLike<T>): Diff<T>[] {
-		console.log(oldList, newList);
 		const posList: Pos[] = myers(oldList, newList);
-		return makeDiffsFromPosList(oldList, newList, posList);;
+		return makeDiffsFromPosList(oldList, newList, posList);
 	}
 
 	diffCommonPrefix(oldList: ArrayLike<T>, newList: ArrayLike<T>): number {
@@ -56,6 +55,14 @@ export class ListDiffer<T> {
 		let i = 1;
 		for(; i <= len; i++) if(oldList[oldLen - i] !== newList[newLen - i]) break;
 		return i - 1;
+	}
+
+	patchMake(diffs: Diff<T>[]): Patch<T>[] {
+		return Patch.make(diffs);
+	}
+
+	patchApply(oldList: ArrayLike<T>, patchs: Patch<T>[]): T[] {
+		return Patch.apply(oldList, patchs);
 	}
 }
 

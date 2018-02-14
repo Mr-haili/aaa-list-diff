@@ -5,23 +5,37 @@ const differ = new ListDiffer();
 // const s2 = 'CBABAC';
 // const s1 = "Good dog";
 // const s2 = "Bad dog";
-const s1 = "Apples are a fruit.";
-const s2 = "BApples are also fruit.";
+const s1 = `
+I am the very model of a modern Major-General,
+I've information vegetable, animal, and mineral,
+I know the kings of England, and I quote the fights historical,
+From Marathon to Waterloo, in order categorical.`;
 
-const diffs = differ.diffMain(s1, s2);
+const s2 = `
+I am the very model of a cartoon individual,
+My animation's comical, unusual, and whimsical,
+I'm quite adept at funny gags, comedic theory I have read,
+From wicked puns and stupid jokes to anvils that drop on your head.`;
 
 console.log('***********差异*********');
-for(let diff of diffs)
+const diffs = differ.diffMain(s1, s2);
+console.log(diffs.map(diff => diff.toString()).join());
+console.log('************************');
+
+console.log('***********补丁*********');
+const patchs = differ.patchMake(diffs);
+for(let patch of patchs)
 {
-	console.log(`${ diff.type }, ${ diff.item }`);	
+	console.log(JSON.stringify(patch));
+	console.log("\n");
 }
 console.log('************************');
 
-
-// // 打补丁变化
-// const newArray = patchApplyArray(s1.split(''), patchs);
-// console.log(newArray.join(''));
-
+console.log('***********打补丁********');
+const newList = differ.patchApply(s1, patchs);
+const strNew = newList.join('');
+console.log(strNew);
+console.log(strNew === s2);
 
 
 
