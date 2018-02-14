@@ -62,8 +62,8 @@ export class ListDiffer<T> {
 		return Patch.make(diffs);
 	}
 
-	patchApply(oldList: ArrayLike<T>, patchs: Patch<T>[]): T[] {
-		return Patch.apply(oldList, patchs);
+	patchApply(patchs: Patch<T>[], oldList: ArrayLike<T>): T[] {
+		return Patch.apply(patchs, oldList);
 	}
 }
 

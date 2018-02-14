@@ -7,13 +7,13 @@ export class Patch<T> {
 	// static methods
 	static make<T>(diffs: Diff<T>[]): Patch<T>[] {
 		const oldList: ArrayLike<T> = Diff.recoverOldList(diffs),
-			patchs: Patch<T>[] = [], diffsLen = diffs.length,
-			PlaceholderDiff: Diff<T> = new Diff(null);
-		let slow = 0, fast = 0,
+			patchs: Patch<T>[] = [], PlaceholderDiff: Diff<T> = new Diff(null);
+		let slow = 0, fast = 0, diffsLen: number,
 			eqDelOffset = 0, insDelOffset = 0,
 			isEatingEq = true, isEqType = true, patch: Patch<T>;
 
 		diffs.push(PlaceholderDiff);
+		diffsLen = diffs.length;
 		while(fast < diffsLen)
 		{
 			isEqType = (diffs[fast].type === DiffType.EQUAL);
@@ -44,7 +44,7 @@ export class Patch<T> {
 	}
 
 	// apply patchs to oldList
-	static apply<T>(oldList: ArrayLike<T>, patchs: Patch<T>[], ItemMap?: any): Array<T> {
+	static apply<T>(patchs: Patch<T>[], oldList: ArrayLike<T>, ItemMap?: any): Array<T> {
 		const newList: Array<T> = [];
 		let idx = 0, oldStart: number,
 			diffIdx: number, diffType: number;

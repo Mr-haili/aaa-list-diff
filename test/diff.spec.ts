@@ -1,3 +1,5 @@
+/* the test case is copied from https://github.com/google/diff-match-patch */
+
 import { Diff, DiffType } from '../src/core/';
 import { ListDiffer } from '../src/list-differ';
 
