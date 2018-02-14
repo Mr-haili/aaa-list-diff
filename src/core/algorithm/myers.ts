@@ -3,17 +3,17 @@ import { Pos } from '../types';
 const Towards: ReadonlyArray<Pos> = [{x: 1, y: 0}, {x: 0, y: 1}];
 
 export function myers<T>(srcList: ArrayLike<T>, tarList: ArrayLike<T>): Pos[] {
+	// when srcList ans tarList is empty
+	if(isEmpty(srcList) && isEmpty(tarList)) return [];
+
 	let round: { [index: number]: Pos } = {};
 	let nextRound: { [index: number]: Pos } = {};
-	const beginPos = { x: 0, y: 0 };
-
-	round[0] = beginPos;
-	portal(srcList, tarList, beginPos);
+	round[0] = portal(srcList, tarList, { x: 0, y: 0 });
 
 	// 进行一次过滤
-	let editDistance = srcList.length + tarList.length;
+	let n = srcList.length + tarList.length + 1;
 	let pos: Pos, nextPos: Pos, idx: number, k: number, x: number, y: number, tmp: Pos;
-	while(editDistance--)
+	while(n--)
 	{
 		for(let idx = -tarList.length; idx <= srcList.length; idx++)
 		{
@@ -53,7 +53,6 @@ function getBetterPos(posA: Pos | undefined, posB: Pos){
 	return posA.y > posB.y ? posA : posB;
 }
 
-// 传送
 function portal<T>(srcList: ArrayLike<T>, tarList: ArrayLike<T>, pos: Pos): Pos {
 	let [x, y] = [pos.x, pos.y];
 	while(srcList[x] && tarList[y] && srcList[x] === tarList[y])
@@ -63,4 +62,9 @@ function portal<T>(srcList: ArrayLike<T>, tarList: ArrayLike<T>, pos: Pos): Pos 
 		pos = { x, y, prePos: pos };
 	}
 	return pos;
+}
+
+function isEmpty<T>(list: ArrayLike<T>): boolean {
+	if(!list || 0 === list.length) return true;
+	return false;
 }

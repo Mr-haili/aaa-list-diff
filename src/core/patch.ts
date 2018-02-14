@@ -82,8 +82,8 @@ export class Patch<T> {
 	}
 
 	// class methods
-  readonly oldLen: number;
-  readonly newLen: number;
+	readonly oldLen: number;
+	readonly newLen: number;
 
 	constructor(
 	  readonly oldStart: number,

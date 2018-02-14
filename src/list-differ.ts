@@ -1,7 +1,4 @@
-import { myers } from './core/algorithm';
-import { makeDiffsFromPosList, Diff, DiffType } from './core/diff';
-import { Pos } from './core/types';
-import { Patch } from './core/patch';
+import { DiffType, Diff, Patch, myers, Pos } from './core';
 
 export class ListDiffer<T> {
 	constructor(readonly isEqFn?: any){ }
@@ -15,11 +12,11 @@ export class ListDiffer<T> {
 
 	  // Trim off common prefix (speedup).
 	  const commonPrefixLen: number = oldList !== newList ? 
-	  	this.diffCommonPrefix(oldList, newList): oldListLen;
+	  	this.diffCommonPrefix(oldList, newList) : oldListLen;
 
 	  // Trim off common suffix (speedup).
 	  const commonSuffixLen: number = oldListLen !== commonPrefixLen ?
-	  	this.diffCommonSuffix(oldList, newList): 0;
+	  	this.diffCommonSuffix(oldList, newList) : 0;
 
 	  // Compute the diff on the middle block.
 	  const diffs = this._diffCompute(
@@ -28,7 +25,11 @@ export class ListDiffer<T> {
 	  );
 
 	  [i, len] = [0, commonPrefixLen];
-	  while(i < len) diffs.unshift(new Diff(oldList[i++]));
+	  while(i < len) 
+	  {
+	  	diffs.unshift(new Diff(oldList[len - i - 1]));
+	  	i += 1;
+	  }
 
 	  [i, len] = [oldListLen - commonSuffixLen, oldListLen];
 	  while(i < len) diffs.push(new Diff(oldList[i++]));
@@ -68,4 +69,31 @@ export class ListDiffer<T> {
 
 function listSlice<T>(list: ArrayLike<T>, begin: number, end: number): ArrayLike<T> {
 	return Array.prototype.slice.call(list, begin, end);
+}
+
+export function makeDiffsFromPosList<T>(
+	oldList: ArrayLike<T>,
+	newList: ArrayLike<T>, 
+	posList: Pos[]
+): Diff<T>[] {
+	const diffs: Diff<T>[] = [];	
+	let diff: Diff<T>, x: number, y: number, preX: number, preY: number;
+	for(let i = 1, len = posList.length; i < len; i++)
+	{
+		[x, y, preX, preY] = [posList[i].x, posList[i].y, posList[i - 1].x, posList[i - 1].y];
+		if(y === preY) // delete
+		{
+			diff = new Diff(oldList[x - 1], DiffType.DELETE);
+		}
+		else if(x === preX) // insert
+		{
+			diff = new Diff(newList[y - 1], DiffType.INSERT);
+		}
+		else // equal
+		{
+			diff = new Diff(oldList[x - 1]);
+		}
+		diffs.push(diff);
+	}
+	return diffs;
 }
