@@ -1,1 +1,3 @@
-export { ListDiffer } from './list-differ';
+import { ListDiffer } from './list-differ';
+
+export { ListDiffer };

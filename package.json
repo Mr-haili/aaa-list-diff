@@ -1,6 +1,6 @@
 {
-  "name": "aaa-list-diff",
-  "version": "0.0.0-alpha",
+  "name": "aaa-list-diff-test",
+  "version": "0.0.5-alpha",
   "description": "a diff util for general list",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

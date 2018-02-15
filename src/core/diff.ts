@@ -1,4 +1,3 @@
-import { Pos } from './types';
 import { Patch } from './patch';
 
 export enum DiffType {

@@ -1,1 +1,1 @@
-export { myers } from './myers';
+export { myers, Pos } from './myers';
