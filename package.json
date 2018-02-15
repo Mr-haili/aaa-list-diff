@@ -2,10 +2,17 @@
   "name": "aaa-list-diff",
   "version": "0.0.0-alpha",
   "description": "a diff util for general list",
-  "main": "aaa-list-diff",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "build": "node_modules/.bin/webpack -w",
+    "prepublish": "npm run build",
+    "build": "node_modules/.bin/webpack",
+    "build:watch": "node_modules/.bin/webpack -w",
     "test": "jasmine-ts \"test/**/*.spec.ts\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mr-haili/aaa-list-diff"
   },
   "keywords": [
     "diff",

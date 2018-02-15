@@ -8,7 +8,7 @@ function resolve(dir){
 module.exports = {
   entry: {
     'polyfills': './src/polyfills.ts',
-    'app': './src/main.ts',
+    'app': './src/index.ts',
   },
   output: {
     filename: "[name].js",
