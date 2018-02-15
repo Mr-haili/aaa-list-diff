@@ -2,7 +2,7 @@
   "name": "aaa-list-diff",
   "version": "0.0.0-alpha",
   "description": "a diff util for general list",
-  "main": "index.js",
+  "main": "aaa-list-diff",
   "scripts": {
     "build": "node_modules/.bin/webpack -w",
     "test": "jasmine-ts \"test/**/*.spec.ts\""
