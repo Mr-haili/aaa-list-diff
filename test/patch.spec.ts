@@ -12,7 +12,7 @@ function diffPatchApply(s1: string, s2: string, s3?: string): string {
 	return differ.patchApply(patchs, s3).join('');
 }
 
-describe('patch apply', function(){
+describe('Patch apply', function(){
 	it('after patch the oldList must equal newList.', function() {
 		let s1: string, s2: string, s3: string, s4: string;
 

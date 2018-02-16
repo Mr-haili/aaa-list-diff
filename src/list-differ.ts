@@ -58,7 +58,24 @@ export class ListDiffer<T> {
 		return i - 1;
 	}
 
-	patchMake(diffs: Diff<T>[]): Patch<T>[] {
+	patchMake(oldList: ArrayLike<T>, newList: ArrayLike<T>): Patch<T>[];
+	patchMake(diffs: Diff<T>[]): Patch<T>[];
+	patchMake(
+		oldListOrDiffs: ArrayLike<T> | Diff<T>[], 
+		newList?: ArrayLike<T>
+	): Patch<T>[] {
+		let diffs: Diff<T>[];
+
+		if(1 === arguments.length)
+		{
+			diffs = oldListOrDiffs as Diff<T>[];
+			if(0 === diffs.length) return [];
+			if(!(diffs[0] instanceof Diff)) throw "patchMake: unsupport arguments";
+			return Patch.make(diffs);
+		}
+
+		const oldList = oldListOrDiffs as ArrayLike<T>;
+		diffs = this.diffMain(oldList, newList);
 		return Patch.make(diffs);
 	}
 

@@ -73,11 +73,8 @@ export class Patch<T> {
 				}
 			}
 		}
-
 		const oldListLen = oldList.length;
 		while(idx < oldListLen) newList.push(oldList[idx++]);
-		// oldArray.shift();
-
 		return newList;
 	}
 

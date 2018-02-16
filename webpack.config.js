@@ -7,14 +7,13 @@ function resolve(dir){
 
 module.exports = {
   entry: {
-    // 'polyfills': './src/polyfills.ts',
     'index': './src/index.ts',
   },
   output: {
     filename: "[name].js",
     path: path.resolve(__dirname, './dist'),
-    libraryTarget: "umd",
-    library: "aaa-list-diff"
+    library: "aaa-list-diff",
+    libraryTarget: "umd"    
   },
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".json"],

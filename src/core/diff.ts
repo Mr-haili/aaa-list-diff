@@ -4,12 +4,6 @@ export enum DiffType {
 	DELETE = -1, INSERT = 1, EQUAL = 0
 };
 
-// const DiffTypeToStr: { [key: number]: string } = {
-// 	'-1': 'd',
-// 	'0': 'e',
-// 	'1': 'i'
-// }
-
 export class Diff<T> {
 	static recoverOldList<T>(diffs: ReadonlyArray<Diff<T>>): T[] {
 		return this._filter(diffs, DiffType.INSERT);
