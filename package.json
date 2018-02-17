@@ -1,14 +1,15 @@
 {
   "name": "aaa-list-diff-test",
-  "version": "0.0.9-alpha",
+  "version": "0.0.11-alpha",
   "description": "a diff util for general list",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
+    "prepublish": "npm run build",
     "prebuild": "npm run clean",
     "build": "node_modules/.bin/webpack",
     "test": "jasmine-ts \"test/**/*.spec.ts\"",
-    "clean": "rm -rf ./dist && mkdir dist",
+    "clean": "rm -rf ./dist && mkdir ./dist",
     "build:watch": "node_modules/.bin/webpack -w"
   },
   "repository": {
