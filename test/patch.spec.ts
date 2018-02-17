@@ -88,7 +88,6 @@ describe('Patch apply', function(){
 
 		s1 = '1234567';
 		s2 = '246';
-		console.log(differ.patchMake(s1, s2));
 		expect(diffPatchApply(s1, s2)).toEqual(s2);				
 	});
 });
