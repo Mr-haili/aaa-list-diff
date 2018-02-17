@@ -32,7 +32,7 @@ export class Patch<T> {
 					patchs.push(patch);
 
 					eqDelOffset += patch.oldLen;
-					insDelOffset = (patch.newLen - patch.oldLen);
+					insDelOffset += (patch.newLen - patch.oldLen);
 				}
 				slow = fast;
 				isEatingEq = !isEatingEq;

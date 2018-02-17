@@ -81,5 +81,14 @@ describe('Patch apply', function(){
 			From wicked puns and stupid jokes to anvils that drop on your head.
 		`;
 		expect(diffPatchApply(s1, s2)).toEqual(s2);
+
+		s1 = '24';
+		s2 = '12345';
+		expect(diffPatchApply(s1, s2)).toEqual(s2);
+
+		s1 = '1234567';
+		s2 = '246';
+		console.log(differ.patchMake(s1, s2));
+		expect(diffPatchApply(s1, s2)).toEqual(s2);				
 	});
 });
